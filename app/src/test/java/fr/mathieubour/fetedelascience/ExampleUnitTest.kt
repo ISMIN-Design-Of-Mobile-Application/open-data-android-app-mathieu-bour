@@ -1,4 +1,4 @@
-package fr.mathieubour.fetdelasciencee
+package fr.mathieubour.fetedelascience
 
 import org.junit.Test
 

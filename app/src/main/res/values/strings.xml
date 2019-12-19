@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">Fête de la science</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="app_description">"Développé par Mathieu Bour dans le cadre du cursus Computer Science à l'École Nationale Supérieure des Mines de Saint Étienne"</string>
+    <string name="tab_text_1">Liste</string>
+    <string name="tab_text_2">Carte</string>
+    <string name="tab_text_3">Infos</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="event_list_item_title">!no title!</string>
+    <string name="event_list_item_description">!no description!</string>
+    <string name="title_activity_event_details">EventDetailsActivity</string>
 </resources>
