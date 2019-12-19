@@ -31,6 +31,13 @@ Exemple de donnée :
 }
 ```
 
+Lorsque l'application est démarrée pour la première fois, la liste des évènements est téléchargée
+à l'aide de Retrofit et insérée dans la base de données locale avec Room.
+Lors des appels suivant, les données de la base de données sont toujours réaffichées en premier afin
+d'éviter d'avoir un écran vide pendant de le chargement.
+
+Les images sont affichées avec Picasso, qui se charge lui-même de la mise en cache des images.
+
 ## Librairies externes
 
 - [Retrofit 2](https://square.github.io/retrofit/) : client HTTP basé sur des interfaces

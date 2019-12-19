@@ -31,6 +31,10 @@ class ListFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_list, container, false)
     }
 
+    /**
+     * 1. Setup the RecyclerView
+     * 2. Setup the observer which will replace the RecyclerView list
+     */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -51,16 +55,15 @@ class ListFragment : Fragment() {
      */
     private fun setupRecyclerView() {
         val recyclerView: RecyclerView = activity!!.findViewById(R.id.event_list)
-        adapter = EventListAdapter(emptyList())
 
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = adapter
-
-        // click listener
-        adapter.onClickListener = { event: Event ->
-            val intent = Intent(activity, EventDetailsActivity::class.java)
+        // Initialize the adapter with an empty list
+        adapter = EventListAdapter(emptyList()) { event: Event ->
+            val intent = Intent(context, EventDetailsActivity::class.java)
             intent.putExtra(EXTRA_EVENT_ID, event.id)
             startActivity(intent)
         }
+
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = adapter
     }
 }
