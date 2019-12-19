@@ -37,3 +37,4 @@ Exemple de donnée :
 - [Picasso](https://square.github.io/picasso/) : affichage simplifié des images
 - [Google Maps et Google Play Services](https://developers.google.com/maps/documentation/android-sdk/intro) : affichage d'une carte Google Maps
 - [Room](https://developer.android.com/topic/libraries/architecture/room) : persistence des données de l'API
+- [Google OSS Licenses](https://github.com/google/play-services-plugins) : affichage des licences tierces
