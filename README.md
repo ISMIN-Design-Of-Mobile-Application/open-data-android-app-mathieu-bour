@@ -1,5 +1,6 @@
 ## Fête de la science
-  
+[![Build Status](https://img.shields.io/github/workflow/status/ISMIN-Design-Of-Mobile-Application/open-data-android-app-mathieu-bour/Android%20CI?style=flat-square)](https://github.com/ISMIN-Design-Of-Mobile-Application/open-data-android-app-mathieu-bour/actions?query=workflow%3A%22Android+CI%22)
+
 Codé par : Mathieu Bour <mathieu.bour@etu.emse.fr>
 
 ## Description  
