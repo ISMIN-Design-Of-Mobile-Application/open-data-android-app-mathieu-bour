@@ -7,6 +7,11 @@ import com.squareup.picasso.Picasso
 import fr.mathieubour.fetedelascience.R
 import fr.mathieubour.fetedelascience.data.Event
 
+/**
+ * Heavily used to list the Events in a RecyclerView in the ListFragment.
+ * @see ListFragment
+ * @see EventViewHolder
+ */
 class EventListAdapter(private var events: List<Event>) : RecyclerView.Adapter<EventViewHolder>() {
     var onClickListener: ((Event) -> Unit)? = null
 
@@ -22,7 +27,7 @@ class EventListAdapter(private var events: List<Event>) : RecyclerView.Adapter<E
     }
 
     /**
-     * Push the data into the view holder
+     * Push the data into the view holder.
      */
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
         val event = events[position]
@@ -31,6 +36,7 @@ class EventListAdapter(private var events: List<Event>) : RecyclerView.Adapter<E
         holder.eventCity.text = event.city
         Picasso.get().load(event.image).into(holder.eventImage)
 
+        // Set the provided click listener
         holder.rootView.setOnClickListener {
             onClickListener?.invoke(event)
         }
@@ -39,10 +45,10 @@ class EventListAdapter(private var events: List<Event>) : RecyclerView.Adapter<E
     override fun getItemCount() = events.size
 
     /**
-     * Make a complete dataset replacement
+     * Make a complete events replacement
      */
-    fun replace(dataset: List<Event>) {
-        this.events = dataset
+    fun replace(events: List<Event>) {
+        this.events = events
         notifyDataSetChanged()
     }
 }

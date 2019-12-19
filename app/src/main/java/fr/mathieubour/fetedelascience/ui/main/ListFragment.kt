@@ -17,7 +17,7 @@ import fr.mathieubour.fetedelascience.data.Event
 import fr.mathieubour.fetedelascience.models.MainViewModel
 
 /**
- * Fragment which hols the event list.
+ * Holds the event list.
  */
 class ListFragment : Fragment() {
     private lateinit var adapter: EventListAdapter

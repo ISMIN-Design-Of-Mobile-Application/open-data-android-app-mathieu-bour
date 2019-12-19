@@ -4,13 +4,12 @@ import android.Manifest
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import fr.mathieubour.fetedelascience.models.MainViewModel
-import fr.mathieubour.fetedelascience.ui.main.SectionsPagerAdapter
+import fr.mathieubour.fetedelascience.ui.main.TabsAdapter
 
 
 class MainActivity : AppCompatActivity() {
@@ -21,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         ViewModelProviders.of(this)[MainViewModel::class.java]
 
         // Tabs
-        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
+        val sectionsPagerAdapter = TabsAdapter(this, supportFragmentManager)
         val viewPager: ViewPager = findViewById(R.id.view_pager)
         viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = findViewById(R.id.tabs)

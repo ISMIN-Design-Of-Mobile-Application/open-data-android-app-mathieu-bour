@@ -4,6 +4,9 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem
 import java.io.Serializable
 
+/**
+ * A "Fête de la science" event.
+ */
 data class Event(
     val id: String,
     val permalink: String,
@@ -25,15 +28,26 @@ data class Event(
     // when
     val dates: String
 ) : Serializable, ClusterItem {
+
+    /**
+     * Get the position in LatLng for Google Maps ClusterManager
+     * @see LatLng
+     */
     override fun getPosition(): LatLng {
         return LatLng(latitude, longitude)
     }
 
-    override fun getSnippet(): String {
-        return description
-    }
-
+    /**
+     * The Google Maps marker title
+     */
     override fun getTitle(): String {
         return name
+    }
+
+    /**
+     * The snippet, aka the description of the generated Google Maps markers
+     */
+    override fun getSnippet(): String {
+        return description
     }
 }
