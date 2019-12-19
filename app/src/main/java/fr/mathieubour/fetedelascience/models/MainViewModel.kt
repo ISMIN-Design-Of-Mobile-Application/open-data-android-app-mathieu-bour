@@ -28,16 +28,16 @@ class MainViewModel : ViewModel() {
      */
     private val eventsList: MutableLiveData<List<Event>> by lazy {
         MutableLiveData<List<Event>>().also {
-            loadEvents()
+            reloadEvents()
         }
     }
 
     fun getEventsList(): LiveData<List<Event>> = eventsList
 
     /**
-     * Since loadEvents is already asynchronous, we use retrofit's execute method.
+     * Since reloadEvents is already asynchronous, we use retrofit's execute method.
      */
-    fun loadEvents() {
+    fun reloadEvents() {
         eventsHttpService.list().enqueue(object : Callback<List<Event>> {
             override fun onFailure(call: Call<List<Event>>, t: Throwable) {
             }
