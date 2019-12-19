@@ -5,11 +5,11 @@
     <string name="tab_text_2">Carte</string>
     <string name="tab_text_3">Infos</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="event_list_item_title">!no title!</string>
     <string name="event_list_item_description">!no description!</string>
     <string name="title_activity_event_details">EventDetailsActivity</string>
     <string name="event_details_organization">Organisé par : %s</string>
     <string name="description_conditions"><![CDATA[Description & conditions]]></string>
+    <string name="about_licenses">Licences tierces-partie</string>
 </resources>
