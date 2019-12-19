@@ -4,7 +4,7 @@ Codé par : Mathieu Bour <mathieu.bour@etu.emse.fr>
 
 ## Description  
 
-- URL des données brutes : [data.gouv.fr](https://www.data.gouv.fr/fr/datasets/programme-de-la-fete-de-la-science-2019))
+- URL des données brutes : sur [data.gouv.fr](https://www.data.gouv.fr/fr/datasets/programme-de-la-fete-de-la-science-2019)
 - URL des données filtrées : [dataset.json](https://storage.googleapis.com/public.mathieu-bour.fr/projects/emse-3a-android/dataset.json)
 - URL des données filtrées (extrait) : [dataset.excerpt.json](https://storage.googleapis.com/public.mathieu-bour.fr/projects/emse-3a-android/dataset.excerpt.json)
 
