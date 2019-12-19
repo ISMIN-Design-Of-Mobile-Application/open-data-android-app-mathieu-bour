@@ -79,6 +79,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         mClusterManager = ClusterManager(context, mMap)
         mMap.setOnCameraIdleListener(mClusterManager)
 
+        // This is the marker click listener which open the EventDetailsActivity
         mClusterManager.setOnClusterItemClickListener { event: Event? ->
             if (event != null) {
                 val intent = Intent(activity, EventDetailsActivity::class.java)

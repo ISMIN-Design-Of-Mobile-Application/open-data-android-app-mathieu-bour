@@ -12,9 +12,10 @@ import fr.mathieubour.fetedelascience.data.Event
  * @see ListFragment
  * @see EventViewHolder
  */
-class EventListAdapter(private var events: List<Event>) : RecyclerView.Adapter<EventViewHolder>() {
-    var onClickListener: ((Event) -> Unit)? = null
-
+class EventListAdapter(
+    private var events: List<Event>,
+    private val onClickListener: ((Event) -> Unit)
+) : RecyclerView.Adapter<EventViewHolder>() {
     /**
      * Instantiate the view holder
      */
@@ -38,7 +39,7 @@ class EventListAdapter(private var events: List<Event>) : RecyclerView.Adapter<E
 
         // Set the provided click listener
         holder.rootView.setOnClickListener {
-            onClickListener?.invoke(event)
+            onClickListener.invoke(event)
         }
     }
 
