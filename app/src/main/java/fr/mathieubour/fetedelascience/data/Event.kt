@@ -1,5 +1,7 @@
 package fr.mathieubour.fetedelascience.data
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem
 import java.io.Serializable
@@ -7,7 +9,9 @@ import java.io.Serializable
 /**
  * A "Fête de la science" event.
  */
+@Entity
 data class Event(
+    @PrimaryKey(autoGenerate = false)
     val id: String,
     val permalink: String,
     // what

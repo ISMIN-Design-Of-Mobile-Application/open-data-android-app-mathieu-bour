@@ -10,19 +10,20 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
+import fr.mathieubour.fetedelascience.data.EventsDatabase
 import fr.mathieubour.fetedelascience.models.MainViewModel
 import fr.mathieubour.fetedelascience.ui.main.TabsAdapter
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
-    private lateinit var reloadEventsButton: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val model = ViewModelProviders.of(this)[MainViewModel::class.java]
+        model.setEventDao(EventsDatabase.getInstance(this).eventDao())
 
         // Tabs
         val sectionsPagerAdapter = TabsAdapter(this, supportFragmentManager)
@@ -33,14 +34,14 @@ class MainActivity : AppCompatActivity() {
 
         // Reload and progress bar
         progressBar = findViewById(R.id.progressBar)
-        reloadEventsButton = findViewById(R.id.fab)
-        reloadEventsButton.setOnClickListener {
+
+        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
             progressBar.visibility = View.VISIBLE
             progressBar.isIndeterminate = true
             model.reloadEvents()
         }
 
-        model.getEventsList().observe(this, Observer {
+        model.eventsList.observe(this, Observer {
             progressBar.isIndeterminate = false
             progressBar.visibility = View.GONE
         })

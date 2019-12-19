@@ -53,6 +53,6 @@ class ListFragment : Fragment() {
 
         // Setup event list observer
         eventsListObserver = Observer { newEvents -> adapter.replace(newEvents) }
-        model.getEventsList().observe(this, eventsListObserver)
+        model.eventsList.observe(this, eventsListObserver)
     }
 }

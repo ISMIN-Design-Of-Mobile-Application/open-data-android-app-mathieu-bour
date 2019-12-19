@@ -67,7 +67,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(franceLatLng, 5.0f))
         }
 
-        model.getEventsList().observe(this, listObserver)
+        model.eventsList.observe(this, listObserver)
 
     }
 

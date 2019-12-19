@@ -1,6 +1,5 @@
-package fr.mathieubour.fetedelascience.http
+package fr.mathieubour.fetedelascience.data
 
-import fr.mathieubour.fetedelascience.data.Event
 import retrofit2.Call
 import retrofit2.http.GET
 
