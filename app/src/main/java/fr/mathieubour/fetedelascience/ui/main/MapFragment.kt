@@ -11,14 +11,14 @@ import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterManager
-import fr.mathieubour.fetedelascience.EXTRA_EVENT
+import fr.mathieubour.fetedelascience.EXTRA_EVENT_ID
 import fr.mathieubour.fetedelascience.EventDetailsActivity
 import fr.mathieubour.fetedelascience.R
 import fr.mathieubour.fetedelascience.data.Event
 import fr.mathieubour.fetedelascience.models.MainViewModel
 
 /**
- * Holds the global Google Map and manage the marker clustering.
+ * Holds the Google Map and manage the marker clustering.
  */
 class MapFragment : Fragment(), OnMapReadyCallback {
     private lateinit var mMapView: MapView
@@ -54,7 +54,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         val franceLatLng = LatLng(46.2276, 2.2137)
 
         mMap = map
-        mMap.isMyLocationEnabled = true
+        mMap.isMyLocationEnabled = false
 
         val model: MainViewModel = activity?.run {
             ViewModelProviders.of(this)[MainViewModel::class.java]
@@ -82,7 +82,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         mClusterManager.setOnClusterItemClickListener { event: Event? ->
             if (event != null) {
                 val intent = Intent(activity, EventDetailsActivity::class.java)
-                intent.putExtra(EXTRA_EVENT, event)
+                intent.putExtra(EXTRA_EVENT_ID, event.id)
                 startActivity(intent)
             }
 

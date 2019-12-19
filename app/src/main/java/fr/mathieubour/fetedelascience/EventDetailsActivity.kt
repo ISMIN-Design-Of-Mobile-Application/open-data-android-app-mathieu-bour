@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import fr.mathieubour.fetedelascience.data.Event
+import fr.mathieubour.fetedelascience.data.EventsDatabase
 import kotlinx.android.synthetic.main.activity_event_details.*
 
 class EventDetailsActivity : AppCompatActivity() {
@@ -33,13 +33,19 @@ class EventDetailsActivity : AppCompatActivity() {
         eventDetailsAddress = findViewById(R.id.event_details_address)
         eventDetailsLocationDescription = findViewById(R.id.event_details_location_description)
 
-        fill(intent.getSerializableExtra(EXTRA_EVENT) as Event)
+        val event = EventsDatabase.getInstance(this)
+            .eventDao()
+            .find(intent.getStringExtra(EXTRA_EVENT_ID)!!)
+            ?: throw Exception("$EXTRA_EVENT_ID must be defined when loading ${this.javaClass.canonicalName}")
+
+        fill(event)
     }
 
     private fun fill(newSelectedEvent: Event) {
         eventDetailsName.text = newSelectedEvent.name
         Picasso.get().load(newSelectedEvent.image).into(eventDetailsImage)
-        eventDetailsOrganization.text = getString(R.string.event_details_organization, newSelectedEvent.organization)
+        eventDetailsOrganization.text =
+            getString(R.string.event_details_organization, newSelectedEvent.organization)
         eventDetailsDates.text = newSelectedEvent.dates
         eventDetailsConditions.text = newSelectedEvent.conditions
         eventDetailsDescription.text = newSelectedEvent.description

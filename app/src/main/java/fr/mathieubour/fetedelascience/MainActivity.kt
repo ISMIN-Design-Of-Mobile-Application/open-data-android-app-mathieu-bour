@@ -14,7 +14,12 @@ import fr.mathieubour.fetedelascience.data.EventsDatabase
 import fr.mathieubour.fetedelascience.models.MainViewModel
 import fr.mathieubour.fetedelascience.ui.main.TabsAdapter
 
-
+/**
+ * Main activity of the application which is composed of three tabs:
+ * 1. The events list (ListFragment)
+ * 2. The map (MapFragment)
+ * 3. The about page (AboutFragment)
+ */
 class MainActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
 
@@ -42,11 +47,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         model.eventsList.observe(this, Observer {
-            progressBar.isIndeterminate = false
-            progressBar.visibility = View.GONE
+            if (it.isNotEmpty()) {
+                progressBar.isIndeterminate = false
+                progressBar.visibility = View.GONE
+            }
         })
-
-        val permission: Array<String> = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
-        requestPermissions(permission, 1)
     }
 }

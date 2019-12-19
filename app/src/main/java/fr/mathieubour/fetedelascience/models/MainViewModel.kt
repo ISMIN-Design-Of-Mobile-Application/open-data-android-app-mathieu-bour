@@ -2,6 +2,7 @@ package fr.mathieubour.fetedelascience.models
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import fr.mathieubour.fetedelascience.API
 import fr.mathieubour.fetedelascience.data.Event
 import fr.mathieubour.fetedelascience.data.EventDao
 import fr.mathieubour.fetedelascience.data.EventsHttpService
@@ -15,13 +16,16 @@ import retrofit2.converter.gson.GsonConverterFactory
  * The main model which is bound to the MainActivity
  * @see fr.mathieubour.fetedelascience.MainActivity
  */
-class MainViewModel() : ViewModel() {
+class MainViewModel : ViewModel() {
+    // Retrofit builder
     private val retrofit: Retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl("https://storage.googleapis.com/public.mathieu-bour.fr/projects/emse-3a-android/")
+        .baseUrl(API)
         .build()
     private val eventsHttpService: EventsHttpService =
         retrofit.create(EventsHttpService::class.java)
+
+    // Room has to be instated in the activity
     private lateinit var eventDao: EventDao
 
     /**
@@ -38,27 +42,25 @@ class MainViewModel() : ViewModel() {
      */
     fun setEventDao(eventDao: EventDao) {
         this.eventDao = eventDao
-        eventsList.value = this.eventDao.getAll()
+
+        if (eventsList.value == null || eventsList.value!!.isEmpty()) {
+            // If the list is not already populated, push the data from teh database to the list
+            eventsList.value = this.eventDao.getAll()
+        }
     }
 
     /**
-     * Since reloadEvents is already asynchronous, we use retrofit's execute method.
+     * Reload the events from the API, and override the database
      */
     fun reloadEvents() {
         eventsHttpService.list().enqueue(object : Callback<List<Event>> {
             override fun onFailure(call: Call<List<Event>>, t: Throwable) {
+                // throw t // I don't really know what to do here, so I suppressed it
             }
 
             override fun onResponse(call: Call<List<Event>>, response: Response<List<Event>>) {
-                val events = response.body()
-
-                if (response.body() == null) {
-                    return
-                }
-
-                events as List<Event>
-
-                eventsList.value = events
+                val events: List<Event> = response.body()!! // Cannot be realistically null
+                eventsList.value = events // update the LiveData
                 eventDao.insertAll(events) // override the existing database
             }
         })

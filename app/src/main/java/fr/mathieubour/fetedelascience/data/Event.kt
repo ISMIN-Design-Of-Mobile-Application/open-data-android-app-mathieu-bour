@@ -36,6 +36,7 @@ data class Event(
     /**
      * Get the position in LatLng for Google Maps ClusterManager
      * @see LatLng
+     * @see ClusterItem.getPosition
      */
     override fun getPosition(): LatLng {
         return LatLng(latitude, longitude)
@@ -43,6 +44,7 @@ data class Event(
 
     /**
      * The Google Maps marker title
+     * @see ClusterItem.getTitle
      */
     override fun getTitle(): String {
         return name
@@ -50,6 +52,7 @@ data class Event(
 
     /**
      * The snippet, aka the description of the generated Google Maps markers
+     * @see ClusterItem.getSnippet
      */
     override fun getSnippet(): String {
         return description

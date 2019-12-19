@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import fr.mathieubour.fetedelascience.EXTRA_EVENT
+import fr.mathieubour.fetedelascience.EXTRA_EVENT_ID
 import fr.mathieubour.fetedelascience.EventDetailsActivity
 import fr.mathieubour.fetedelascience.R
 import fr.mathieubour.fetedelascience.data.Event
@@ -34,25 +34,33 @@ class ListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        // Setup recycler view
-        val recyclerView: RecyclerView = activity!!.findViewById(R.id.event_list)
-        val linearLayoutManager = LinearLayoutManager(context)
-        recyclerView.layoutManager = linearLayoutManager
-        adapter = EventListAdapter(emptyList())
-        recyclerView.adapter = adapter
+        setupRecyclerView()
 
         val model: MainViewModel = activity?.run {
             ViewModelProviders.of(this)[MainViewModel::class.java]
         } ?: throw Exception("Invalid Activity")
 
-        adapter.onClickListener = { event: Event ->
-            val intent = Intent(activity, EventDetailsActivity::class.java)
-            intent.putExtra(EXTRA_EVENT, event)
-            startActivity(intent)
-        }
-
         // Setup event list observer
         eventsListObserver = Observer { newEvents -> adapter.replace(newEvents) }
         model.eventsList.observe(this, eventsListObserver)
+    }
+
+    /**
+     * Using the EventListAdapter, setup the recycler view
+     * @see EventListAdapter
+     */
+    private fun setupRecyclerView() {
+        val recyclerView: RecyclerView = activity!!.findViewById(R.id.event_list)
+        adapter = EventListAdapter(emptyList())
+
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = adapter
+
+        // click listener
+        adapter.onClickListener = { event: Event ->
+            val intent = Intent(activity, EventDetailsActivity::class.java)
+            intent.putExtra(EXTRA_EVENT_ID, event.id)
+            startActivity(intent)
+        }
     }
 }
