@@ -5,6 +5,6 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface EventsHttpService {
-    @GET("dataset.excerpt.json")
+    @GET("dataset.json")
     fun list(): Call<List<Event>>
 }

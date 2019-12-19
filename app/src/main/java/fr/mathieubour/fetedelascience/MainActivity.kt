@@ -1,5 +1,6 @@
 package fr.mathieubour.fetedelascience
 
+import android.Manifest
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
@@ -32,5 +33,8 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+
+        val permission: Array<String> = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
+        requestPermissions(permission, 1)
     }
 }

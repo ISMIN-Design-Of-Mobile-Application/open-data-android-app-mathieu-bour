@@ -4,6 +4,9 @@
     package="fr.mathieubour.fetedelascience">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
 
     <application
         android:allowBackup="true"
@@ -28,6 +31,9 @@
             android:label="@string/title_activity_event_details"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBbKKMLvisEFhL7V_U8exilxH_dIt9RM1E" />

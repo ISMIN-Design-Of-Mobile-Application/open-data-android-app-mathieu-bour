@@ -10,4 +10,6 @@
     <string name="event_list_item_title">!no title!</string>
     <string name="event_list_item_description">!no description!</string>
     <string name="title_activity_event_details">EventDetailsActivity</string>
+    <string name="event_details_organization">Organisé par : %s</string>
+    <string name="description_conditions"><![CDATA[Description & conditions]]></string>
 </resources>

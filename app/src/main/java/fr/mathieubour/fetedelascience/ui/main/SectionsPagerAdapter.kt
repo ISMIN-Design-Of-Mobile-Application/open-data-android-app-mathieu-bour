@@ -16,12 +16,11 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
         R.string.tab_text_3
     )
 
-    override fun getItem(position: Int): Fragment? {
+    override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> ListFragment()
             1 -> MapFragment()
-            2 -> AboutFragment()
-            else -> null
+            else -> AboutFragment()
         }
     }
 

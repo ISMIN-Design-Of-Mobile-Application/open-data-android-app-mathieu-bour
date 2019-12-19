@@ -8,48 +8,42 @@ import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import fr.mathieubour.fetedelascience.data.Event
 import kotlinx.android.synthetic.main.activity_event_details.*
-import kotlinx.serialization.json.Json
-
-private val LOAD_EVENT_REQUEST_CODE = "LOAD_EVENT_REQUEST_CODE";
 
 class EventDetailsActivity : AppCompatActivity() {
-    private lateinit var eventDetailsTitle: TextView
+    private lateinit var eventDetailsName: TextView
     private lateinit var eventDetailsImage: ImageView
-    private lateinit var eventDetailsCity: TextView
+    private lateinit var eventDetailsOrganization: TextView
     private lateinit var eventDetailsDates: TextView
+    private lateinit var eventDetailsConditions: TextView
+    private lateinit var eventDetailsDescription: TextView
+    private lateinit var eventDetailsAddress: TextView
+    private lateinit var eventDetailsLocationDescription: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_details)
 
-        eventDetailsTitle = findViewById(R.id.event_details_title)
+        eventDetailsName = findViewById(R.id.event_details_name)
         eventDetailsImage = findViewById(R.id.event_details_image)
-        eventDetailsCity = findViewById(R.id.event_details_city)
+        eventDetailsOrganization = findViewById(R.id.event_details_organization)
         eventDetailsDates = findViewById(R.id.event_details_dates)
+        eventDetailsAddress = findViewById(R.id.event_details_address)
+        eventDetailsConditions = findViewById(R.id.event_details_conditions)
+        eventDetailsDescription = findViewById(R.id.event_details_description)
+        eventDetailsAddress = findViewById(R.id.event_details_address)
+        eventDetailsLocationDescription = findViewById(R.id.event_details_location_description)
 
-        val eventString = intent.getStringExtra(EXTRA_EVENT)
-        val event: Event = Json.parse(Event.serializer(), eventString!!)
-
-        fill(event)
-
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+        fill(intent.getSerializableExtra(EXTRA_EVENT) as Event)
     }
 
-
     private fun fill(newSelectedEvent: Event) {
-        eventDetailsTitle.text = newSelectedEvent.title
+        eventDetailsName.text = newSelectedEvent.name
         Picasso.get().load(newSelectedEvent.image).into(eventDetailsImage)
-        eventDetailsCity.text = newSelectedEvent.city
-
-        val dates: String = if (newSelectedEvent.starts_at == newSelectedEvent.ends_at) {
-            newSelectedEvent.starts_at
-        } else {
-            newSelectedEvent.starts_at + " - " + newSelectedEvent.ends_at
-        }
-
-        eventDetailsDates.text = dates
+        eventDetailsOrganization.text = getString(R.string.event_details_organization, newSelectedEvent.organization)
+        eventDetailsDates.text = newSelectedEvent.dates
+        eventDetailsConditions.text = newSelectedEvent.conditions
+        eventDetailsDescription.text = newSelectedEvent.description
+        eventDetailsAddress.text = newSelectedEvent.address
+        event_details_location_description.text = newSelectedEvent.location_description
     }
 }

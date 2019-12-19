@@ -27,7 +27,7 @@ class EventListAdapter(private var events: List<Event>) : RecyclerView.Adapter<E
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
         val event = events[position]
 
-        holder.eventTitle.text = event.title
+        holder.eventTitle.text = event.name
         holder.eventCity.text = event.city
         Picasso.get().load(event.image).into(holder.eventImage)
 

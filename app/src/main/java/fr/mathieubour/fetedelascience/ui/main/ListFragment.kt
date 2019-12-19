@@ -15,7 +15,6 @@ import fr.mathieubour.fetedelascience.EventDetailsActivity
 import fr.mathieubour.fetedelascience.R
 import fr.mathieubour.fetedelascience.data.Event
 import fr.mathieubour.fetedelascience.models.MainViewModel
-import kotlinx.serialization.json.Json
 
 /**
  * Fragment which hols the event list.
@@ -29,7 +28,6 @@ class ListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_list, container, false)
     }
 
@@ -43,14 +41,13 @@ class ListFragment : Fragment() {
         adapter = EventListAdapter(emptyList())
         recyclerView.adapter = adapter
 
-
         val model: MainViewModel = activity?.run {
             ViewModelProviders.of(this)[MainViewModel::class.java]
         } ?: throw Exception("Invalid Activity")
 
         adapter.onClickListener = { event: Event ->
             val intent = Intent(activity, EventDetailsActivity::class.java)
-            intent.putExtra(EXTRA_EVENT, Json.stringify(Event.serializer(), event))
+            intent.putExtra(EXTRA_EVENT, event)
             startActivity(intent)
         }
 
