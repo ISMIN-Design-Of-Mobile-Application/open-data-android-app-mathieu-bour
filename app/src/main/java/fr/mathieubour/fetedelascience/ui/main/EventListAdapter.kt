@@ -1,11 +1,14 @@
 package fr.mathieubour.fetedelascience.ui.main
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import fr.mathieubour.fetedelascience.R
 import fr.mathieubour.fetedelascience.data.Event
+import java.lang.Exception
 
 /**
  * Heavily used to list the Events in a RecyclerView in the ListFragment.
@@ -33,9 +36,18 @@ class EventListAdapter(
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
         val event = events[position]
 
+        holder.eventLoader.visibility = View.VISIBLE
+
         holder.eventTitle.text = event.name
         holder.eventCity.text = event.city
-        Picasso.get().load(event.image).into(holder.eventImage)
+        Picasso.get().load(event.image).into(holder.eventImage, object: Callback{
+            override fun onSuccess() {
+                holder.eventLoader.visibility = View.GONE
+            }
+
+            override fun onError(e: Exception?) {
+            }
+        })
 
         // Set the provided click listener
         holder.rootView.setOnClickListener {
